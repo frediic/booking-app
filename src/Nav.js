@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -39,7 +40,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
@@ -65,14 +65,24 @@ export default function Nav() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <Button color="inherit" href="/home">
+              Home
+            </Button>
+            <Button color="inherit" href="/services">
+              Services
+            </Button>
+            <Button color="inherit" href="#about">
+              About
+            </Button>
+            <Button color="inherit" href="/contact">
+              Contact
+            </Button>
+            <Button color="inherit" href="/login">
+              Login
+            </Button>
+          </Box>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
