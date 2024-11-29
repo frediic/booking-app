@@ -1,20 +1,30 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Greeting from "./Greeting";
 import Nav from "./Nav";
-import LoginForm from "./shared/LoginForm";
+import { Home } from "./shared/Home.js";
+import Login from "./shared/Login.js";
+import About from "./shared/About";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import StoreProvider from "./shared/StoreProvider.js";
 
 function App() {
-  const prop={
-    name:'Fred'
+  const prop = {
+    name: 'Fred'
   }
   return (
-    <div className="App">
-      <Nav />
-      <LoginForm name='Fred' />
-      <LoginForm name='Rose' />
-      <LoginForm name='Jon' />
-    </div>
+    <StoreProvider>
+      <Router>
+        <div className="App">
+          <Nav />
+        </div>
+        <Routes>
+          <Route path='/about' element={<About />} />
+          <Route path='/home'  element={<Home />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </Router>
+
+    </StoreProvider>
+
   );
 }
 
