@@ -29,77 +29,82 @@ const rows = [
     createData("Cupcake", 305, 3.7, 67, 4.3),
     createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
+// export function Home(counter) {
+//     const [data, setData] = useState(rows);
+//     const [searchText, setSearch] = useState(rows);
+//     const searchItems = () => {
+//         if (searchText == '') {
+//             setData(rows);
+//             return;
+//         }
+//         const result = rows.filter(x => x.name.toString().toLowerCase().includes(searchText.toLowerCase()));
+//         setData(result);
+//     };
+//     const { search } = useLocation(); // Access query parameters
+//     const query = new URLSearchParams(search);
+//     const username = query.get("username"); // Get the 'username' parameter
+
+//     return (
+//         <div className="container-fluid">
+//             <div className="container mt-3">
+//                 <Card sx={{ minWidth: 275 }} className="mt-2 mb-1">
+//                     <CardContent>
+//                         <Typography
+//                             gutterBottom
+//                             sx={{ color: "text.secondary", fontSize: 14 }}
+//                         >
+//                             Search Component
+//                         </Typography>
+//                         <TextField
+//                             fullWidth
+//                             id="filled-basic"
+//                             label="Enter text to search"
+//                             variant="filled"
+
+//                             onChange={(e) => setSearch(e.target.value)}
+//                         />
+//                     </CardContent>
+//                     <CardActions>
+//                         <Button onClick={searchItems} size="small">
+//                             Search
+//                         </Button>
+//                     </CardActions>
+//                 </Card>
+//                 <TableContainer component={Paper}>
+//                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
+//                         <TableHead>
+//                             <TableRow>
+//                                 <TableCell>Dessert (100g serving)</TableCell>
+//                                 <TableCell align="right">Calories</TableCell>
+//                                 <TableCell align="right">Fat&nbsp;(g)</TableCell>
+//                                 <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+//                                 <TableCell align="right">Protein&nbsp;(g)</TableCell>
+//                             </TableRow>
+//                         </TableHead>
+//                         <TableBody>
+//                             {data.map((row) => (
+//                                 <TableRow
+//                                     key={row.name}
+//                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+//                                 >
+//                                     <TableCell component="th" scope="row">
+//                                         {row.name}
+//                                     </TableCell>
+//                                     <TableCell align="right">{row.calories}</TableCell>
+//                                     <TableCell align="right">{row.fat}</TableCell>
+//                                     <TableCell align="right">{row.carbs}</TableCell>
+//                                     <TableCell align="right">{row.protein}</TableCell>
+//                                 </TableRow>
+//                             ))}
+//                         </TableBody>
+//                     </Table>
+//                 </TableContainer>
+//             </div>
+//         </div>
+//     );
+// }
 export function Home(counter) {
-    const [data, setData] = useState(rows);
-    const [searchText, setSearch] = useState(rows);
-    const searchItems = () => {
-        if (searchText == '') {
-            setData(rows);
-            return;
-        }
-        const result = rows.filter(x => x.name.toString().toLowerCase().includes(searchText.toLowerCase()));
-        setData(result);
-    };
-    const { search } = useLocation(); // Access query parameters
-    const query = new URLSearchParams(search);
-    const username = query.get("username"); // Get the 'username' parameter
+    // conditional rendering
+    
 
-    return (
-        <div className="container-fluid">
-            <div className="container mt-3">
-                <Card sx={{ minWidth: 275 }} className="mt-2 mb-1">
-                    <CardContent>
-                        <Typography
-                            gutterBottom
-                            sx={{ color: "text.secondary", fontSize: 14 }}
-                        >
-                            Search Component
-                        </Typography>
-                        <TextField
-                            fullWidth
-                            id="filled-basic"
-                            label="Enter text to search"
-                            variant="filled"
-
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                    </CardContent>
-                    <CardActions>
-                        <Button onClick={searchItems} size="small">
-                            Search
-                        </Button>
-                    </CardActions>
-                </Card>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Dessert (100g serving)</TableCell>
-                                <TableCell align="right">Calories</TableCell>
-                                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                                <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data.map((row) => (
-                                <TableRow
-                                    key={row.name}
-                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell align="right">{row.calories}</TableCell>
-                                    <TableCell align="right">{row.fat}</TableCell>
-                                    <TableCell align="right">{row.carbs}</TableCell>
-                                    <TableCell align="right">{row.protein}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </div>
-    );
 }
