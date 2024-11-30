@@ -73,7 +73,7 @@ export default function Nav() {
             <Button color="inherit" href="/services">
               Services
             </Button>
-            <Button color="inherit" href="#about">
+            <Button color="inherit" href="/about">
               About
             </Button>
             <Button color="inherit" href="/contact">
