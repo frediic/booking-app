@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import Login from "./shared/Login";
 import { Counter } from "./shared/Counter.js";
 import Credential from "./shared/Credential";
-import About from "./shared/About";
+import Welcome from "./shared/Welcome.js";
 import Services from "./shared/Services";
 import Contact from "./shared/Contact";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -16,15 +16,14 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Routes>
+          <Route path="/about" element={<Credential />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/home" element={<Counter />} />
+          <Route path="/" element={<Welcome />} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path="/about" element={<Credential />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/home" element={<Counter />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
     </Router>
   );
 }
