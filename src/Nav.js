@@ -9,6 +9,7 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,49 +52,168 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Nav() {
+export default function Nav({ setIsAdmin, setLogoutMessage }) {
+  const navigate = useNavigate();
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("clientCookie");
+    setIsAdmin(null);
+    setLogoutMessage("Logged Out Successfully");
+    navigate("/");
+  };
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+    <>
+      <>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
 
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <Button color="inherit" href="/home">
-              Home
-            </Button>
-            <Button color="inherit" href="/services">
-              Services
-            </Button>
-            <Button color="inherit" href="/about">
-              About
-            </Button>
-            <Button color="inherit" href="/contact">
-              Contact
-            </Button>
-            <Button color="inherit" href="/login">
-              Login
-            </Button>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Button color="inherit" href="/home">
+                  Home
+                </Button>
+                <Button color="inherit" href="/services">
+                  Manage Bookings
+                </Button>
+                <Button color="inherit" href="/about">
+                  Upload Content
+                </Button>
+                <Button color="inherit" href="/contact">
+                  Customer Services
+                </Button>
+                <Button onClick={logout} color="inherit" href="/contact">
+                  Signout
+                </Button>
+              </Box>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Toolbar>
+          </AppBar>
+        </Box>
+      </>
+      {/* {role === "customer" && (
+        <>
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  sx={{ mr: 2 }}
+                >
+                  <MenuIcon />
+                </IconButton>
+
+                <Box
+                  sx={{
+                    flexGrow: 1,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button color="inherit" href="/home">
+                    Home
+                  </Button>
+                  <Button color="inherit" href="/services">
+                    Services
+                  </Button>
+                  <Button color="inherit" href="/about">
+                    About
+                  </Button>
+                  <Button color="inherit" href="/contact">
+                    Contact
+                  </Button>
+                  <Button color="inherit" href="/login">
+                    Login
+                  </Button>
+                </Box>
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
+              </Toolbar>
+            </AppBar>
           </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        </>
+      )}
+      {role === "admin" && (
+        <>
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  sx={{ mr: 2 }}
+                >
+                  <MenuIcon />
+                </IconButton>
+
+                <Box
+                  sx={{
+                    flexGrow: 1,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button color="inherit" href="/home">
+                    Home
+                  </Button>
+                  <Button color="inherit" href="/services">
+                    Manage Bookings
+                  </Button>
+                  <Button color="inherit" href="/about">
+                    Upload Content
+                  </Button>
+                  <Button color="inherit" href="/contact">
+                    Customer Services
+                  </Button>
+                </Box>
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
+              </Toolbar>
+            </AppBar>
+          </Box>
+        </>
+      )} */}
+    </>
   );
 }

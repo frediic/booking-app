@@ -14,6 +14,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import CardHeader from "@mui/material/CardHeader";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,174 +57,87 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Welcome() {
+export default function Welcome({ setIsAdmin }) {
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState(false);
+  const navigate = useNavigate();
 
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+
+  //   if (password === "admin") {
+  //     setRole("admin");
+  //     navigate("/home");
+  //   } else {
+  //     setRole("customer");
+  //     navigate("/home");
+  //   }
+  // };
   const handleLogin = (e) => {
     e.preventDefault();
     if (password === "") {
       alert("Password should not be empty");
       return;
     }
+    let user = {};
     if (password === "admin") {
       setIsAdmin(true);
+      user = { email: email, password: password, isAdmin: "isAdmin" };
     } else {
       setIsAdmin(false);
+      user = { email: email, password: password, isAdmin: "janitor" };
     }
-    setLoggedIn(true);
+    localStorage.clear();
+    localStorage.setItem("clientCookie", JSON.stringify(user));
+    navigate("/home");
   };
   return (
-    <div>
-      {!loggedIn ? (
-        <Card sx={{ minWidth: 275 }} className="container mt-2">
-          <CardHeader
-            title="Provide your login credentials"
-            subheader="All fields are required"
-          />
-          <CardContent>
-            <div className="container">
-              <div className="row mb-2">
-                <div className="col-sm-4"></div>
-                <div className="col-sm-1">
-                  <Typography variant="h6" component="div">
-                    Email
-                  </Typography>
-                </div>
-                <div className="col-sm-5">
-                  <TextField
-                    fullWidth
-                    id="filled-basic"
-                    label="Email"
-                    variant="filled"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="row mb-2">
-                <div className="col-sm-4"></div>
-                <div className="col-sm-1">
-                  <Typography variant="h6" component="div">
-                    Password
-                  </Typography>
-                </div>
-                <div className="col-sm-5">
-                  <TextField
-                    type="password"
-                    fullWidth
-                    id="outlined-basic"
-                    label="Password"
-                    variant="filled"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="row mb-2">
-                <div className="col-sm-4"></div>
-                <div className="col-sm-1"></div>
-                <div className="col-sm-5">
-                  <Button variant="contained" fullWidth onClick={handleLogin}>
-                    Sign In
-                  </Button>
-                </div>
-              </div>
+    <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <Card
+        sx={{ minWidth: 275 }}
+        className="w-100"
+        style={{ maxWidth: "500px" }}
+      >
+        <CardHeader
+          title="Provide your login credentials"
+          subheader="All fields are required"
+        />
+        <CardContent>
+          <form>
+            <div className="mb-3">
+              <Typography variant="h6" component="div">
+                Email
+              </Typography>
+              <TextField
+                fullWidth
+                id="filled-basic"
+                label="Email"
+                variant="filled"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-          </CardContent>
-          <CardActions />
-        </Card>
-      ) : (
-        <div>
-          {isAdmin ? (
-            <Box sx={{ flexGrow: 1 }}>
-              <AppBar position="static">
-                <Toolbar>
-                  <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 2 }}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-
-                  <Box
-                    sx={{
-                      flexGrow: 1,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Button color="inherit" href="/home">
-                      Manage
-                    </Button>
-                    <Button color="inherit" href="/services">
-                      Upload
-                    </Button>
-                  </Box>
-                  <Search>
-                    <SearchIconWrapper>
-                      <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                      placeholder="Search…"
-                      inputProps={{ "aria-label": "search" }}
-                    />
-                  </Search>
-                </Toolbar>
-              </AppBar>
-            </Box>
-          ) : (
-            <Box sx={{ flexGrow: 1 }}>
-              <AppBar position="static">
-                <Toolbar>
-                  <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 2 }}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-
-                  <Box
-                    sx={{
-                      flexGrow: 1,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Button color="inherit" href="/home">
-                      Home
-                    </Button>
-                    <Button color="inherit" href="/services">
-                      Services
-                    </Button>
-                    <Button color="inherit" href="/about">
-                      About
-                    </Button>
-                    <Button color="inherit" href="/contact">
-                      Contact
-                    </Button>
-                  </Box>
-                  <Search>
-                    <SearchIconWrapper>
-                      <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                      placeholder="Search…"
-                      inputProps={{ "aria-label": "search" }}
-                    />
-                  </Search>
-                </Toolbar>
-              </AppBar>
-            </Box>
-          )}
-        </div>
-      )}
+            <div className="mb-3">
+              <Typography variant="h6" component="div">
+                Password
+              </Typography>
+              <TextField
+                type="password"
+                fullWidth
+                id="outlined-basic"
+                label="Password"
+                variant="filled"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <Button variant="contained" fullWidth onClick={handleLogin}>
+                Sign In
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+        <CardActions />
+      </Card>
     </div>
   );
 }

@@ -9,8 +9,14 @@ import Typography from "@mui/material/Typography";
 import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { useNavigate } from "react-router-dom";
 
-function Services() {
+function Services({ signout }) {
+  const handleSignOut = () => {
+    sessionStorage.removeItem("clientCookie");
+    signout(false);
+  };
+  const navigate = useNavigate();
   return (
     <div className="container" style={{ display: "flex", gap: "20px" }}>
       <Card sx={{ maxWidth: 300 }}>
@@ -70,6 +76,9 @@ function Services() {
           title="green iguana"
         />
         <CardContent>
+          <Button onClick={handleSignOut} variant="outlined" size="small">
+            Signout
+          </Button>
           <Typography gutterBottom variant="h5" component="div">
             Standard
           </Typography>
